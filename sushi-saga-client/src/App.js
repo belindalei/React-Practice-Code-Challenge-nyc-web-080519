@@ -43,7 +43,7 @@ class App extends Component {
     let matchingSushiIndex = sushiCopy.findIndex(sushi => parseInt(sushi.id) === parseInt(id))
     let matchingSushi = sushiCopy[matchingSushiIndex]
     
-    if(matchingSushi.img_url === undefined){
+    if(matchingSushi === undefined){
       alert('already eaten!')
     } else {
       matchingSushi.img_url = ""
