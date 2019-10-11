@@ -4,8 +4,6 @@ import Sushi from '../components/Sushi'
 
 const SushiContainer = (props) => {
 
-  console.log(props.eatenSushi)
-
   const renderSushi = () => {
     return props.currentSushi.map(sushiObj => < Sushi key={sushiObj.id} name={sushiObj.name} img={sushiObj.img_url} price={sushiObj.price} eatMoreSushi={props.eatMoreSushi} id={sushiObj.id} />)
   }

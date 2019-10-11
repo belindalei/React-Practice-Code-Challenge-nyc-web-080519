@@ -12,7 +12,8 @@ class App extends Component {
   state = {
     sushi: [], 
     currentSushi: [],
-    eatenSushi: []
+    eatenSushi: [], 
+    amountRemaining: 100
   }
 
   componentDidMount(){
@@ -20,6 +21,23 @@ class App extends Component {
       .then(resp => resp.json())
       //setState updates the values and then calls render
       .then(this.getNextSushi)
+  }
+
+  amountEaten = () => {
+    let sushiPrices = this.state.eatenSushi.map(sushi => sushi.price)
+    console.log("Sushi prices:", this.state.eatenSushi)
+    
+    // if (sushiPrices.length !== 0) {
+      const sumOfPrices = (sum, num) => {
+        return sum + num
+      }
+
+      let totalPrice = sushiPrices.reduce(sumOfPrices, 0)
+      let amount = 100 - totalPrice
+      return amount
+    // } else {
+    //   return 100 
+    // }
   }
 
   getNextSushi = (sushiArr) => {
@@ -49,19 +67,30 @@ class App extends Component {
       matchingSushi.img_url = ""
       this.setState({ 
         currentSushi: sushiCopy,
-        eatenSushi: [...this.state.eatenSushi, sushiCopy[matchingSushiIndex]] 
+        eatenSushi: [...this.state.eatenSushi, sushiCopy[matchingSushiIndex]],
       })
+    }
+
+    //reduce the amount eaten 
+    let amount = this.amountEaten()
+  
+    if (amount <= 0){
+      alert('no more $$$')
+    } else {
+      this.setState({amountRemaining: amount})
     }
     
   }
   
-  
-  
+
   render() {
+
+    console.log(this.state.amountRemaining)
+
     return (
       <div className="app">
       <SushiContainer currentSushi={this.state.currentSushi} getMoreSushi={this.getMoreSushi} key="sushi" eatMoreSushi={this.eatMoreSushi} />
-      <Table eatenSushi={this.state.eatenSushi}/>
+      <Table eatenSushi={this.state.eatenSushi} amountRemaining={this.state.amountRemaining}/>
       </div>
     );
   }
