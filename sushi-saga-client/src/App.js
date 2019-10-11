@@ -47,13 +47,12 @@ class App extends Component {
       alert('already eaten!')
     } else {
       matchingSushi.img_url = ""
+      this.setState({ 
+        currentSushi: sushiCopy,
+        eatenSushi: [...this.state.eatenSushi, sushiCopy[matchingSushiIndex]] 
+      })
     }
     
-    this.setState({ 
-      currentSushi: sushiCopy,
-      eatenSushi: [...this.state.eatenSushi, sushiCopy[matchingSushiIndex]] 
-    })
-    console.log(this.state.eatenSushi)
   }
   
   
@@ -62,7 +61,7 @@ class App extends Component {
     return (
       <div className="app">
       <SushiContainer currentSushi={this.state.currentSushi} getMoreSushi={this.getMoreSushi} key="sushi" eatMoreSushi={this.eatMoreSushi} />
-      <Table />
+      <Table eatenSushi={this.state.eatenSushi}/>
       </div>
     );
   }
