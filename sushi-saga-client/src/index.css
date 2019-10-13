@@ -67,6 +67,12 @@ body {
   margin: auto;
 }
 
+.form {
+  left: 50% 
+
+}
+
+
 .table {
   grid-area: tb;
   background-image: url("https://storybookstorage.s3.amazonaws.com/items/images/000/152/688/original/Table.png?1444827374");

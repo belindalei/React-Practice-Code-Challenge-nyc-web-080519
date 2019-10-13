@@ -1,4 +1,4 @@
-{ 
+{
   "sushis": [
     {
       "id": 1,
@@ -699,6 +699,18 @@
       "img_url": "https://sushistickers.com/img/sushi-slice_75.png",
       "price": 15,
       "created_at": "2018-07-27T18:53:16.516Z"
+    },
+    {
+      "value": "3",
+      "id": 101
+    },
+    {
+      "value": "4",
+      "id": 102
+    },
+    {
+      "value": "11",
+      "id": 103
     }
   ]
 }

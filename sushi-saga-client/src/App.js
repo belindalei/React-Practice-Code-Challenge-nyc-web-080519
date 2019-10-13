@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SushiContainer from './containers/SushiContainer';
 import Table from './containers/Table';
+import SushiWallet from './containers/SushiWallet'; 
 
 //state and fetch in app
 
@@ -81,14 +82,39 @@ class App extends Component {
     }
     
   }
-  
+
+  walletSubmitHandler = (amount) => {
+    this.persistAmount(amount)
+  }
+
+  persistAmount= (amount) => {
+
+    const options = {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        accepts: "application/json"
+      },
+      body: JSON.stringify(
+        amount
+      )
+    }
+
+    fetch(API, options)
+      .then(resp => resp.json())
+      .then( amount => {
+        let newAmount = parseInt(this.state.amountRemaining) + parseInt(amount.value)
+
+        this.setState({
+          amountRemaining: newAmount
+        })
+      })
+  }
 
   render() {
-
-    console.log(this.state.amountRemaining)
-
     return (
       <div className="app">
+      <SushiWallet submitHandler={this.walletSubmitHandler} />
       <SushiContainer currentSushi={this.state.currentSushi} getMoreSushi={this.getMoreSushi} key="sushi" eatMoreSushi={this.eatMoreSushi} />
       <Table eatenSushi={this.state.eatenSushi} amountRemaining={this.state.amountRemaining}/>
       </div>
